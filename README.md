@@ -1,18 +1,25 @@
 # Health-Focused Retrofit Prioritisation in England
 
-This project explores where housing retrofit investment may deliver both sustainability and public health benefits by identifying local authorities where poor housing energy efficiency, fuel poverty and respiratory health risks overlap.
-
 **Linking housing energy efficiency, fuel poverty and respiratory health outcomes**
+
+This project explores where housing retrofit investment may deliver both sustainability and
+public health benefits by identifying local authorities where poor housing energy efficiency,
+fuel poverty and respiratory health risks overlap.
 
 ## Project question
 
-Which local authorities in England should be prioritised for retrofit investment because they combine poor housing energy efficiency, fuel poverty and worse respiratory health outcomes?
+Which local authorities in England should be prioritised for retrofit investment because they
+combine poor housing energy efficiency, fuel poverty and worse respiratory health outcomes?
 
 ## Why this matters
 
-Buildings are not only an environmental issue. They are also a public health issue. Poorly insulated homes can contribute to cold, damp and unaffordable living conditions, while retrofit can support both net zero goals and health equity.
+Buildings are not only an environmental issue — they are also a public health issue. Poorly
+insulated homes can contribute to cold, damp and unaffordable living conditions, while retrofit
+can support both net zero goals and health equity.
 
-This project connects construction sustainability to public health by identifying local authorities where housing energy inefficiency, fuel poverty and respiratory health risk overlap — areas where retrofit investment could deliver both environmental and health benefits.
+This project connects construction sustainability to public health by identifying local authorities
+where housing energy inefficiency, fuel poverty and respiratory health risk overlap — areas where
+retrofit investment could deliver both environmental and health benefits.
 
 ## Data sources
 
@@ -34,22 +41,26 @@ This project connects construction sustainability to public health by identifyin
 
 The composite retrofit-health priority score is calculated as:
 
-retrofit_health_priority_score = 0.4 x normalised_percent_homes_below_epc_c + 0.3 x normalised_fuel_poverty_rate + 0.3 x normalised_respiratory_health_risk
+```
+retrofit_health_priority_score = 0.4 × normalised_percent_homes_below_epc_c
+                               + 0.3 × normalised_fuel_poverty_rate
+                               + 0.3 × normalised_respiratory_health_risk
+```
 
-This does not claim that poor housing energy efficiency directly causes respiratory outcomes. Instead, it identifies local authorities where housing sustainability, fuel poverty and respiratory health risks overlap as a priority signal for further investigation.
+This does not claim that poor housing energy efficiency directly causes respiratory outcomes.
+Instead, it identifies local authorities where housing sustainability, fuel poverty and respiratory
+health risks overlap as a priority signal for further investigation.
 
 ## Final dataset
 
-The final dataset contains 294 English local authority districts.
+The final dataset contains 294 English local authority districts, using LAD-level geography only:
 
-The analysis uses local authority district codes only:
+- **E06** — Unitary authorities
+- **E07** — Non-metropolitan districts
+- **E08** — Metropolitan districts
+- **E09** — London boroughs
 
-- E06: unitary authorities
-- E07: non-metropolitan districts
-- E08: metropolitan districts
-- E09: London boroughs
-
-The dataset excludes non-comparable geography levels and uses EPC local authority names as the source of truth for local authority naming.
+The analysis excludes non-comparable geography levels such as counties and metropolitan counties.
 
 ## Priority band distribution
 
@@ -59,23 +70,25 @@ The dataset excludes non-comparable geography levels and uses EPC local authorit
 | High | 59 |
 | Medium | 117 |
 | Low | 59 |
+| **Total** | **294** |
 
 ## Top priority signals
 
 The highest-scoring local authorities in the final LAD-only dataset include:
 
-1. Birmingham
-2. Stoke-on-Trent
-3. Blackpool
-4. Bradford
-5. Liverpool
-6. Leeds
-7. Kingston upon Hull, City of
-8. Nottingham
-9. Barnsley
-10. Sandwell
+1. Stockton-on-Tees
+2. Wyre Forest
+3. Staffordshire Moorlands
+4. Stoke-on-Trent
+5. Birmingham
+6. Blackpool
+7. Coventry
+8. Rossendale
+9. Dudley
+10. Doncaster
 
-These are not claims of direct causation. They indicate areas where housing inefficiency, fuel poverty and respiratory health risk overlap most strongly.
+These are not claims of direct causation. They indicate areas where housing inefficiency,
+fuel poverty and respiratory health risk overlap most strongly and warrant further investigation.
 
 ## Visual outputs
 
@@ -101,17 +114,21 @@ These are not claims of direct causation. They indicate areas where housing inef
 
 ## Repository structure
 
+```
 health-focused-retrofit-prioritisation/
-  README.md
-  requirements.txt
-  data/
-    raw/          - Source data files
-    processed/    - Cleaned intermediate files
-    output/       - Final LAD-only dataset
-  notebooks/      - Jupyter notebook with full analysis
-  visuals/        - All 5 output charts
-  src/            - Data processing scripts
+├── README.md
+├── requirements.txt
+├── data/
+│   ├── raw/           Source data files
+│   ├── processed/     Cleaned intermediate files
+│   └── output/        Final LAD-only dataset (CSV)
+├── notebooks/         Jupyter notebook with full analysis
+├── visuals/           All 5 output charts (PNG)
+└── src/               Data processing scripts
+```
 
 ## Language note
 
-This analysis identifies areas where housing inefficiency, fuel poverty and respiratory health risk overlap as an association and priority signal. It does not make claims of direct causation. All findings should be treated as areas for further investigation.
+This analysis identifies areas where housing inefficiency, fuel poverty and respiratory health risk
+overlap as an association and priority signal. It does not make claims of direct causation.
+All findings should be treated as areas for further investigation.
