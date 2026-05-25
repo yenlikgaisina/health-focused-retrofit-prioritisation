@@ -1,5 +1,7 @@
 # Health-Focused Retrofit Prioritisation in England
 
+This project explores where housing retrofit investment may deliver both sustainability and public health benefits by identifying local authorities where poor housing energy efficiency, fuel poverty and respiratory health risks overlap.
+
 **Linking housing energy efficiency, fuel poverty and respiratory health outcomes**
 
 ## Project question
@@ -19,16 +21,6 @@ This project connects construction sustainability to public health by identifyin
 | EPC Open Data | MHCLG / EPC Register | Housing energy efficiency by property |
 | Sub-regional Fuel Poverty Statistics | DESNZ (2025 release) | Fuel poverty rate by local authority (LILEE metric) |
 | OHID Fingertips Respiratory Profile | UKHSA / OHID | COPD admissions, asthma admissions, respiratory mortality |
-| ONS Green Space Access | ONS | Access to gardens and public green space (v2 addition) |
-
-### Data tracking
-
-| Data source | File name | Downloaded? | Notes |
-|-------------|-----------|-------------|-------|
-| EPC Open Data | epc_domestic.csv | No | Use local authority and energy rating fields |
-| Fuel Poverty | fuel_poverty_2023.xlsx | No | Use local authority table (LILEE metric) |
-| OHID Fingertips | respiratory_indicators.csv | No | Use COPD/asthma/respiratory mortality indicators |
-| ONS Green Space | green_space_access.csv | No | Optional for version 1 |
 
 ## Method
 
@@ -37,93 +29,89 @@ This project connects construction sustainability to public health by identifyin
 3. Join respiratory health indicators from OHID Fingertips
 4. Calculate a composite retrofit-health priority score
 5. Rank local authorities by combined sustainability and public health need
-6. Assign priority bands: Very High / High / Medium / Low
 
-### Priority score formula
+## Priority score
 
-```
-retrofit_health_priority_score =
-  0.4 × normalised_percent_homes_below_epc_c
-+ 0.3 × normalised_fuel_poverty_rate
-+ 0.3 × normalised_respiratory_health_risk
-```
+The composite retrofit-health priority score is calculated as:
 
-### Priority bands
+retrofit_health_priority_score = 0.4 x normalised_percent_homes_below_epc_c + 0.3 x normalised_fuel_poverty_rate + 0.3 x normalised_respiratory_health_risk
 
-| Band | Percentile threshold |
-|------|----------------------|
-| Very High | Top 20% |
-| High | Next 20% (60th–80th percentile) |
-| Medium | Middle 40% (20th–60th percentile) |
-| Low | Bottom 20% |
+This does not claim that poor housing energy efficiency directly causes respiratory outcomes. Instead, it identifies local authorities where housing sustainability, fuel poverty and respiratory health risks overlap as a priority signal for further investigation.
 
-## Outputs
+## Final dataset
 
-- `data/output/health_focused_retrofit_prioritisation_england.csv` — combined dataset with priority scores
-- Priority scoring table and ranked local authorities
-- 5 visualisations (see `visuals/` and Colab notebook)
-- Top 20 priority local authorities
+The final dataset contains 294 English local authority districts.
 
-### Visualisations
+The analysis uses local authority district codes only:
 
-1. **Top 20 local authorities for health-focused retrofit** — bar chart
-2. **Housing inefficiency vs fuel poverty** — scatter plot
-3. **Fuel poverty vs respiratory health outcomes** — scatter plot
-4. **Retrofit-health priority matrix** — bubble chart
-5. **Priority band distribution** — bar chart
+- E06: unitary authorities
+- E07: non-metropolitan districts
+- E08: metropolitan districts
+- E09: London boroughs
 
-## Project structure
+The dataset excludes non-comparable geography levels and uses EPC local authority names as the source of truth for local authority naming.
 
-```
+## Priority band distribution
+
+| Priority band | Number of local authorities |
+|---|---:|
+| Very High | 59 |
+| High | 59 |
+| Medium | 117 |
+| Low | 59 |
+
+## Top priority signals
+
+The highest-scoring local authorities in the final LAD-only dataset include:
+
+1. Birmingham
+2. Stoke-on-Trent
+3. Blackpool
+4. Bradford
+5. Liverpool
+6. Leeds
+7. Kingston upon Hull, City of
+8. Nottingham
+9. Barnsley
+10. Sandwell
+
+These are not claims of direct causation. They indicate areas where housing inefficiency, fuel poverty and respiratory health risk overlap most strongly.
+
+## Visual outputs
+
+### Top 20 priority local authorities
+
+![Top 20 priority local authorities](visuals/01_top20_priority_las.png)
+
+### Housing inefficiency and fuel poverty
+
+![Housing inefficiency vs fuel poverty](visuals/02_epc_vs_fuel_poverty.png)
+
+### Fuel poverty and respiratory health risk
+
+![Fuel poverty vs respiratory health](visuals/03_fuel_poverty_vs_respiratory.png)
+
+### Retrofit-health priority matrix
+
+![Retrofit-health priority matrix](visuals/04_priority_matrix_bubble.png)
+
+### Priority band distribution
+
+![Priority distribution](visuals/05_priority_distribution.png)
+
+## Repository structure
+
 health-focused-retrofit-prioritisation/
   README.md
   requirements.txt
   data/
-    raw/          ← place downloaded source files here
-    processed/    ← cleaned intermediate files
-    output/       ← final combined CSV
-  notebooks/
-    health_focused_retrofit_analysis.ipynb
-  visuals/        ← exported chart images
-  src/
-    clean_epc.py
-    clean_fuel_poverty.py
-    clean_health.py
-    build_dataset.py
-```
+    raw/          - Source data files
+    processed/    - Cleaned intermediate files
+    output/       - Final LAD-only dataset
+  notebooks/      - Jupyter notebook with full analysis
+  visuals/        - All 5 output charts
+  src/            - Data processing scripts
 
-## How to run
+## Language note
 
-```bash
-# 1. Install dependencies
-pip install -r requirements.txt
-
-# 2. Place raw data files in data/raw/
-
-# 3. Clean each source
-python src/clean_epc.py
-python src/clean_fuel_poverty.py
-python src/clean_health.py
-
-# 4. Build the combined dataset
-python src/build_dataset.py
-
-# 5. Run the Colab notebook for visualisations
-# Open notebooks/health_focused_retrofit_analysis.ipynb in Google Colab
-```
-
-## Limitations
-
-This project identifies overlapping risk patterns. It does **not** prove causation between housing energy efficiency and respiratory health outcomes.
-
-Areas flagged as high priority reflect a co-occurrence of housing, economic and health risk indicators. They are signals for further investigation and intervention planning, not direct evidence of a causal link.
-
-Language used in this project: *overlap*, *association*, *priority signal*, *areas for further investigation*.
-
-## Skills demonstrated
-
-Python · pandas · public health analytics · retrofit · EPC data · fuel poverty · respiratory health · sustainability · data visualisation
-
----
-
-*Part of the Gaisina Consulting Group portfolio. Separate from the ESG Construction Sustainability Media Analysis project.*
+This analysis identifies areas where housing inefficiency, fuel poverty and respiratory health risk overlap as an association and priority signal. It does not make claims of direct causation. All findings should be treated as areas for further investigation.
