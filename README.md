@@ -53,7 +53,7 @@ health risks overlap as a priority signal for further investigation.
 
 ## Final dataset
 
-The final dataset contains 294 English local authority districts, using LAD-level geography only:
+The final dataset contains 296 English local authority districts, using LAD-level geography only:
 
 - **E06** — Unitary authorities
 - **E07** — Non-metropolitan districts
@@ -68,9 +68,9 @@ The analysis excludes non-comparable geography levels such as counties and metro
 |---|---:|
 | Very High | 59 |
 | High | 59 |
-| Medium | 117 |
-| Low | 59 |
-| **Total** | **294** |
+| Medium | 118 |
+| Low | 60 |
+| **Total** | **296** |
 
 ## Top priority signals
 
